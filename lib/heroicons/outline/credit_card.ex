@@ -1,0 +1,15 @@
+defmodule Heroicons.Outline.CreditCardIcon do
+  @moduledoc "outline/credit-card.svg"
+  use Surface.Component
+
+  @doc "css class"
+  prop(class, :css_class, default: "w-5 h-5")
+
+  def render(assigns) do
+    ~H"""
+    <svg class={{ @class }} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 10H21M7 15H8M12 15H13M6 19H18C19.6569 19 21 17.6569 21 16V8C21 6.34315 19.6569 5 18 5H6C4.34315 5 3 6.34315 3 8V16C3 17.6569 4.34315 19 6 19Z" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    """
+  end
+end

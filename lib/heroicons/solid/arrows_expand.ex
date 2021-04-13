@@ -1,0 +1,15 @@
+defmodule Heroicons.Solid.ArrowsExpandIcon do
+  @moduledoc "solid/arrows-expand.svg"
+  use Surface.Component
+
+  @doc "css class"
+  prop(class, :css_class, default: "w-5 h-5")
+
+  def render(assigns) do
+    ~H"""
+    <svg class={{ @class }} viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 8V4M3 4H7M3 4L7 8M15 8V4M15 4H11M15 4L11 8M3 12V16M3 16H7M3 16L7 12M15 16L11 12M15 16V12M15 16H11" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    """
+  end
+end
