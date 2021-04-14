@@ -33,7 +33,7 @@ defmodule SurfaceHeroicons do
     svg_content =
       File.read!(svg_filepath)
       |> String.trim()
-      |> String.replace(~r/svg width=\"(\d)+\" height=\"(\d)+\"/, "svg class={{ @class }}")
+      |> String.replace(~r/<svg /, "<svg class={{ @class }} ")
 
     component_content = (namespace <> module_name(filename)) |> build_component(docs, svg_content)
     File.write!(component_filepath, component_content)
