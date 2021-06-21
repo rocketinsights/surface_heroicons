@@ -1,39 +1,36 @@
-defmodule SurfaceHeroicons do
-  @moduledoc """
-  Documentation for `Heroicons`.
-  """
+defmodule Mix.Tasks.Heroicons.Generate do
+  use Mix.Task
 
-  @doc """
-  Convert source SVG files into Surface components
-
-  ## Examples
-
-      iex> Heroicons.convert()
-      :ok
-
-  """
-  def convert() do
+  @shortdoc "Convert source SVG files into Surface components"
+  def run(_) do
     Enum.each(["outline", "solid"], &loop_directory/1)
+
+    Mix.Task.run("format")
   end
 
   defp loop_directory(folder) do
-    path = "./lib/heroicons/#{folder}/"
+    src_path = "./priv/heroicons/src/#{folder}/"
+    dest_path = "./lib/heroicons/#{folder}/"
     namespace = "Heroicons.#{String.capitalize(folder)}."
 
-    path
+    File.rm_rf(dest_path)
+    File.mkdir_p(dest_path)
+
+    src_path
     |> File.ls!()
-    |> Enum.each(&create_component(folder, path, namespace, &1))
+    |> Enum.filter(&(Path.extname(&1) == ".svg"))
+    |> Enum.each(&create_component(folder, src_path, dest_path, namespace, &1))
   end
 
-  defp create_component(folder, path, namespace, filename) do
-    svg_filepath = Path.join(path, filename)
-    component_filepath = Path.join(path, component_filename(filename))
+  defp create_component(folder, src_path, dest_path, namespace, filename) do
+    svg_filepath = Path.join(src_path, filename)
+    component_filepath = Path.join(dest_path, component_filename(filename))
     docs = "#{folder}/#{filename}"
 
     svg_content =
       File.read!(svg_filepath)
       |> String.trim()
-      |> String.replace(~r/<svg /, "<svg class={{ @class }} ")
+      |> String.replace(~r/<svg /, "<svg class={@class} ")
 
     component_content = (namespace <> module_name(filename)) |> build_component(docs, svg_content)
     File.write!(component_filepath, component_content)
@@ -63,10 +60,10 @@ defmodule SurfaceHeroicons do
       use Surface.Component
 
       @doc "css class"
-      prop(class, :css_class, default: "w-5 h-5")
+      prop class, :css_class, default: "w-5 h-5"
 
       def render(assigns) do
-        ~H\"\"\"
+        ~F\"\"\"
         #{svg}
         \"\"\"
       end

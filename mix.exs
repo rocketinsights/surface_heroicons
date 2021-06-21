@@ -2,7 +2,7 @@ defmodule SurfaceHeroicons.MixProject do
   use Mix.Project
 
   @project_url "https://github.com/rocketinsights/surface_heroicons"
-  @version "0.3.0"
+  @version "0.5.0"
 
   def project do
     [
@@ -37,7 +37,7 @@ defmodule SurfaceHeroicons.MixProject do
   defp deps do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:surface, "~> 0.4.0"}
+      {:surface, "~> 0.5.0"}
     ]
   end
 
@@ -47,7 +47,8 @@ defmodule SurfaceHeroicons.MixProject do
       licenses: ["MIT"],
       links: %{
         "GitHub" => @project_url,
-        "Rocket Insights" => "https://rocketinsights.com"
+        "Rocket Insights" => "https://rocketinsights.com",
+        "Jon Principe" => "https://github.com/jprincipe"
       }
     ]
   end
