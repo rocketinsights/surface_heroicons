@@ -7,7 +7,7 @@ defmodule Heroicons.Solid.UserRemoveIcon do
 
   def render(assigns) do
     ~F"""
-    <svg class={@class} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class={@class} width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
     <path d="M11 6C11 7.65685 9.65685 9 8 9C6.34315 9 5 7.65685 5 6C5 4.34315 6.34315 3 8 3C9.65685 3 11 4.34315 11 6Z" fill="#4A5568"/>
     <path d="M14 17C14 13.6863 11.3137 11 8 11C4.68629 11 2 13.6863 2 17H14Z" fill="#4A5568"/>
