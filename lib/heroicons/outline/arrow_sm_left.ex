@@ -7,8 +7,8 @@ defmodule Heroicons.Outline.ArrowSmLeftIcon do
 
   def render(assigns) do
     ~F"""
-    <svg class={@class} width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M11 17L6 12M6 12L11 7M6 12L18 12" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg class={@class} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
     </svg>
     """
   end

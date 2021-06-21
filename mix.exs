@@ -2,7 +2,7 @@ defmodule SurfaceHeroicons.MixProject do
   use Mix.Project
 
   @project_url "https://github.com/rocketinsights/surface_heroicons"
-  @version "0.5.1"
+  @version "0.5.2"
 
   def project do
     [

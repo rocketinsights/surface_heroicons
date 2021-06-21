@@ -28,7 +28,7 @@ specifying classes
 
 clone down the latest `src` folder from the [Heroicons](https://github.com/tailwindlabs/heroicons) github repo
 ```bash
-svn export https://github.com/tailwindlabs/heroicons/trunk/src priv/heroicons/src --force;
+svn export https://github.com/tailwindlabs/heroicons/trunk/optimized priv/heroicons/src --force;
 mix heroicons.generate;
 ```
 

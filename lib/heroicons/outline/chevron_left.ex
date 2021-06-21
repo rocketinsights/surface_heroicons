@@ -7,8 +7,8 @@ defmodule Heroicons.Outline.ChevronLeftIcon do
 
   def render(assigns) do
     ~F"""
-    <svg class={@class} width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M15 19L8 12L15 5" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg class={@class} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
     </svg>
     """
   end

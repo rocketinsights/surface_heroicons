@@ -7,8 +7,8 @@ defmodule Heroicons.Outline.ChevronDoubleUpIcon do
 
   def render(assigns) do
     ~F"""
-    <svg class={@class} width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <path d="M5 11L12 4L19 11M5 19L12 12L19 19" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg class={@class} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l7-7 7 7M5 19l7-7 7 7"/>
     </svg>
     """
   end
