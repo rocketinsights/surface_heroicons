@@ -2,7 +2,7 @@ defmodule SurfaceHeroicons.MixProject do
   use Mix.Project
 
   @project_url "https://github.com/rocketinsights/surface_heroicons"
-  @version "0.5.2"
+  @version "0.5.3"
 
   def project do
     [
@@ -37,7 +37,7 @@ defmodule SurfaceHeroicons.MixProject do
   defp deps do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:surface, "~> 0.5.0"}
+      {:surface, ">= 0.5.0"}
     ]
   end
 
