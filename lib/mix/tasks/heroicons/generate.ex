@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Heroicons.Generate do
     |> Enum.each(&create_component(folder, src_path, dest_path, namespace, &1))
   end
 
-  defp create_component(folder, src_path, dest_path, namespace, filename) do
+  defp create_component("outline" = folder, src_path, dest_path, namespace, filename) do
     svg_filepath = Path.join(src_path, filename)
     component_filepath = Path.join(dest_path, component_filename(filename))
     docs = "#{folder}/#{filename}"
@@ -30,9 +30,33 @@ defmodule Mix.Tasks.Heroicons.Generate do
     svg_content =
       File.read!(svg_filepath)
       |> String.trim()
-      |> String.replace(~r/<svg /, "<svg class={@class} ")
+      |> String.replace(
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" aria-hidden=\"true\">",
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" class={@class} fill={@fill} viewBox=\"0 0 24 24\" stroke={@stroke} aria-hidden=\"true\">"
+      )
 
-    component_content = (namespace <> module_name(filename)) |> build_component(docs, svg_content)
+    component_content =
+      (namespace <> module_name(filename)) |> build_component(docs, svg_content, folder)
+
+    File.write!(component_filepath, component_content)
+  end
+
+  defp create_component("solid" = folder, src_path, dest_path, namespace, filename) do
+    svg_filepath = Path.join(src_path, filename)
+    component_filepath = Path.join(dest_path, component_filename(filename))
+    docs = "#{folder}/#{filename}"
+
+    svg_content =
+      File.read!(svg_filepath)
+      |> String.trim()
+      |> String.replace(
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">",
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" class={@class} viewBox=\"0 0 20 20\" fill={@fill} aria-hidden=\"true\">"
+      )
+
+    component_content =
+      (namespace <> module_name(filename)) |> build_component(docs, svg_content, folder)
+
     File.write!(component_filepath, component_content)
   end
 
@@ -53,7 +77,7 @@ defmodule Mix.Tasks.Heroicons.Generate do
     |> Kernel.<>("Icon")
   end
 
-  defp build_component(module_name, docs, svg) do
+  defp build_component(module_name, docs, svg, "outline") do
     """
     defmodule #{module_name} do
       @moduledoc "#{docs}"
@@ -61,6 +85,33 @@ defmodule Mix.Tasks.Heroicons.Generate do
 
       @doc "css class"
       prop class, :css_class, default: "w-5 h-5"
+
+      @doc "svg fill"
+      prop fill, :string, default: "none"
+
+      @doc "svg stroke"
+      prop stroke, :string, default: "currentColor"
+
+      def render(assigns) do
+        ~F\"\"\"
+        #{svg}
+        \"\"\"
+      end
+    end
+    """
+  end
+
+  defp build_component(module_name, docs, svg, "solid") do
+    """
+    defmodule #{module_name} do
+      @moduledoc "#{docs}"
+      use Surface.Component
+
+      @doc "css class"
+      prop class, :css_class, default: "w-5 h-5"
+
+      @doc "svg fill"
+      prop fill, :string, default: "currentColor"
 
       def render(assigns) do
         ~F\"\"\"
